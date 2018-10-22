@@ -19,6 +19,8 @@ class Repair
 
     private $idTech;
 
+    private $arrivalDate;
+
     /**
      * Méthode de construction de l'objet Réparation (Repair).
      *
@@ -80,6 +82,16 @@ class Repair
     }
 
     /**
+     * Méthode publique modifiant la date d'arrivée liée à la Réparation (Repair).
+     *
+     * @param int $arrivalDate
+     */
+    public function setArrivalDate($arrivalDate)
+    {
+        $this->arrivalDate = $arrivalDate;
+    }
+
+    /**
      * Méthode publique donnant accès à l'id de la Réparation (Repair).
      *
      * @return int
@@ -127,5 +139,15 @@ class Repair
     public function getIdTech()
     {
         return $this->idTech;
+    }
+
+    /**
+     * Méthode publique donnant accès à la date d'arrivée liée à la Réparation (Repair).
+     *
+     * @return int
+     */
+    public function getArrivalDate()
+    {
+        return $this->arrivalDate;
     }
 }

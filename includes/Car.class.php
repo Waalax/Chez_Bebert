@@ -10,8 +10,6 @@ class Car
 
     private $registrationNumber;
 
-    private $arrivalDate;
-
     private $brand;
 
     private $model;
@@ -19,6 +17,8 @@ class Car
     private $year;
 
     private $mileage;
+
+    private $idCustomer;
 
     /**
      *
@@ -38,15 +38,6 @@ class Car
     public function setRegistrationNumber($registrationNumer)
     {
         $this->registrationNumber = $registrationNumer;
-    }
-
-    /**
-     *
-     * @param int $arrivalDate
-     */
-    public function setArrivalDate($arrivalDate)
-    {
-        $this->arrivalDate = $arrivalDate;
     }
 
     /**
@@ -85,6 +76,15 @@ class Car
         $this->mileage = $mileage;
     }
 
+    /**
+     *
+     * @param int $idCustomer
+     */
+    public function setIdCustomer($idCustomer)
+    {
+        $this->idCustomer = $idCustomer;
+    }
+
     // Fonctions d'obtention des attributs de l'objet Voiture (Car).
     
     /**
@@ -94,15 +94,6 @@ class Car
     public function getRegistrationNumber()
     {
         return $this->registrationNumber;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getArrivalDate()
-    {
-        return $this->arrivalDate;
     }
 
     /**
@@ -139,5 +130,14 @@ class Car
     public function getMileage()
     {
         return $this->mileage;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getIdCustomer()
+    {
+        return $this->idCustomer;
     }
 }

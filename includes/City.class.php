@@ -10,7 +10,7 @@ class City
 
     private $name;
 
-    private $nb_customers;
+    private $nbCustomers;
 
     /**
      * Méthode publique permettant de construire l'objet Commune (City).
@@ -37,9 +37,9 @@ class City
      *
      * @param int $nb_customers
      */
-    public function setNumberOfCustomers($nb_customers)
+    public function setNumberOfCustomers($nbCustomers)
     {
-        $this->nb_customers = $nb_customers;
+        $this->nbCustomers = $nbCustomers;
     }
 
     /**
@@ -59,6 +59,6 @@ class City
      */
     public function getNumberOfCustomers()
     {
-        return $this->nb_customers;
+        return $this->nbCustomers;
     }
 }
