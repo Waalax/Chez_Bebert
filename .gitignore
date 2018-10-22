@@ -1,0 +1,11 @@
+# Ignore hidden files
+.*
+
+!.gitignore
+!.gitattributes
+!.gitkeep
+
+/vendor/
+composer.lock
+/node_modules
+/output
