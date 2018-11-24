@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+<meta charset="utf-8" />
+
+<head>
+
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="../modules/css/index.css" />
+
+<script src="../modules/js/lib/jquery-3.3.1.js"></script>
+<script src="../modules/js/lib/jquery-ui-1.12.0.js"></script>
+<!-- <script src="../modules/js/common.js"></script> -->
+<!-- <script src="../modules/js/index.js"></script> -->
+
+<title>Page de Connexion</title>
+</head>
+
+<body>
+
+	<div id="header">
+		<h1>Connexion</h1>
+	</div>
+
+	<form method='POST' action="../includes/sessions/connection.php">
+			<div class="Item_and_his_value">
+				<div class="item">
+						<div class="item_text">Pseudo</div>
+					</div>
+					<div class="value">
+						<input type="text" name="pseudo" size="40" maxlength="100">
+					</div>
+			</div>
+				<div class="Item_and_his_value">
+					<div class="item">
+						<div class="item_text">pass</div>
+					</div>
+					<div class="value">
+						<input type="text" name="pass" size="40" maxlength="100">
+					</div>
+				</div>
+		<input type="submit" value="Se connecter" name="connect">
+
+	</form>
+
+</body>
+
+</html>
