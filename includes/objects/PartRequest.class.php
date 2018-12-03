@@ -56,8 +56,7 @@ class PartRequest
             }
             if ($this->checkInput($year))
             {
-                $year = $this->transform($year);
-                $this->addCondition($this->request, "parts.year LIKE '$year'", $and);
+                $this->addCondition($this->request, "parts.year = '$year'", $and);
                 $and = true;
             }
             if ($this->checkInput($model))
@@ -68,8 +67,7 @@ class PartRequest
             }
             if ($this->checkInput($id_part))
             {
-                $id_part = $this->transform($id_part);
-                $this->addCondition($this->request, "parts.id_part LIKE '$id_part'", $and);
+                $this->addCondition($this->request, "parts.id_part = '$id_part'", $and);
                 $and = true;
             }
         }

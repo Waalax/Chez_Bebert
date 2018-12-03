@@ -1,7 +1,7 @@
 <?php
 class TechnicianRequest
 {
-    private $request = "SELECT id_technician, name, surname, nb_cars FROM technicians";
+    private $request = "SELECT id_technician, name, surname, group_id FROM technicians";
     private function checkInput($input)
     {
         $re = '/[a-zA-Z0-9]+/';

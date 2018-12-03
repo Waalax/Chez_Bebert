@@ -1,7 +1,7 @@
 <?php
 class RepairRequest
 {
-    private $request = '';
+    private $request = 'SELECT id_rep, id_technician, registration, type, comments, date_arrival FROM repairs';
     private function checkInput($input)
     {
         $re = '/[a-zA-Z0-9]+/';
@@ -9,12 +9,12 @@ class RepairRequest
         
         return boolval($matches);
     }
-    private function checkAllInput($name, $surname, $registration, $date_arrival)
+    private function checkAllInput($id_technician, $registration, $type, $date_arrival)
     {
         $re = '/[a-zA-Z0-9]+/';
-        preg_match_all($re, $name, $matches1, PREG_SET_ORDER, 0);
-        preg_match_all($re, $surname, $matches2, PREG_SET_ORDER, 0);
-        preg_match_all($re, $registration, $matches3, PREG_SET_ORDER, 0);
+        preg_match_all($re, $id_technician, $matches1, PREG_SET_ORDER, 0);
+        preg_match_all($re, $registration, $matches2, PREG_SET_ORDER, 0);
+        preg_match_all($re, $type, $matches3, PREG_SET_ORDER, 0);
         preg_match_all($re, $date_arrival, $matches4, PREG_SET_ORDER, 0);
         
         return (boolval($matches1) or boolval($matches2) or boolval($matches3) or boolval($matches4));
@@ -35,34 +35,31 @@ class RepairRequest
         $string = '%' . $string . '%';
         return $string;
     }
-    public function __construct($name, $surname, $registration, $date_arrival)
+    public function __construct($id_technician, $registration, $type, $date_arrival)
     {
-        if ($this->checkAllInput($name, $surname, $registration, $date_arrival))
+        if ($this->checkAllInput($id_technician, $registration, $type, $date_arrival))
         {
             $and = false;
             $this->request = $this->request . " WHERE";
-            if ($this->checkInput($name))
+            if ($this->checkInput($id_technician))
             {
-                $name = $this->transform($name);
-                $this->addCondition($this->request, "customers.name LIKE '$name'", $and);
-                $and = true;
-            }
-            if ($this->checkInput($surname))
-            {
-                $surname = $this->transform($surname);
-                $this->addCondition($this->request, "customers.surname LIKE '$surname'", $and);
+                $this->addCondition($this->request, "repairs.id_technician = $id_technician", $and);
                 $and = true;
             }
             if ($this->checkInput($registration))
             {
-                $registration = $this->transform($registration);
-                $this->addCondition($this->request, "cars.registration LIKE '$registration'", $and);
+                $this->addCondition($this->request, "repairs.registration = '$registration'", $and);
+                $and = true;
+            }
+            if ($this->checkInput($type))
+            {
+                $type = $this->transform($type);
+                $this->addCondition($this->request, "repairs.type LIKE '$type'", $and);
                 $and = true;
             }
             if ($this->checkInput($date_arrival))
             {
-                $date_arrival = $this->transform($date_arrival);
-                $this->addCondition($this->request, "repairs.date_arrival LIKE '$date_arrival'", $and);
+                $this->addCondition($this->request, "repairs.date_arrival = '$date_arrival'", $and);
                 $and = true;
             }
         }

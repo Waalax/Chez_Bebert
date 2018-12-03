@@ -43,8 +43,7 @@ class PackageRequest
             $this->request = $this->request . " WHERE";
             if ($this->checkInput($id_package))
             {
-                $id_package = $this->transform($id_package);
-                $this->addCondition($this->request, "packages.id_package LIKE '$id_package'", $and);
+                $this->addCondition($this->request, "packages.id_package = $id_package", $and);
                 $and = true;
             }
             if ($this->checkInput($name))
@@ -55,14 +54,12 @@ class PackageRequest
             }
             if ($this->checkInput($year))
             {
-                $year = $this->transform($year);
-                $this->addCondition($this->request, "packages.year LIKE '$year'", $and);
+                $this->addCondition($this->request, "packages.year = $year", $and);
                 $and = true;
             }
             if ($this->checkInput($kilometerage))
             {
-                $kilometerage = $this->transform($kilometerage);
-                $this->addCondition($this->request, "packages.kilometerage LIKE '$kilometerage'", $and);
+                $this->addCondition($this->request, "packages.kilometerage > $kilometerage", $and);
                 $and = true;
             }
         }

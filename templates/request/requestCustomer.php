@@ -12,7 +12,7 @@ if (! isset($_SESSION ['name']))
 <html>
 <head>
 <meta charset='utf-8' />
-<link rel='stylesheet' href='../modules/css/index.css' />
+<link rel='stylesheet' href='../../modules/css/index.css' />
 
 <title>Chez Bébert - Clients</title>
 

@@ -4,6 +4,7 @@ if (! isset($_SESSION ['name']))
 {
     header("Location: /garage_bebert/templates/connection.html");
 }
+$_SESSION ['request'] = array ();
 ?>
 
 <!DOCTYPE html>
@@ -100,11 +101,11 @@ elseif ($_POST ['searchRequest'] == '... des voitures')
 elseif ($_POST ['searchRequest'] == '... des réparations')
 {
     $_POST ['searchRequest'] = NULL;
-    $array = array (array ('Nom du client','surname' ),
-            array ('Prénom du client','name' ),
+    $array = array (array ('Id du technicien','id_technician' ),
             array ("Plaque d'immatriculation",'registration' ),
+            array ("Type de réparation",'type' ),
             array ("Date d'arrivée (format AAAA-MM-JJ)",'date_arrival' ) );
-    $form = new FormObject('', $array);
+    $form = new FormObject('templates/request/requestRepair.php', $array);
     echo $form->getHTML();
 }
 ?>
@@ -134,28 +135,28 @@ if ($_SESSION ['group_id'] == 1)
     {
         $_POST ['searchRequest'] = NULL;
         $array = array (array ('Nom','surname' ),array ('Prénom','name' ) );
-        $form = new FormObject('includes/libraries/requestTechnician.function.php', $array);
+        $form = new FormObject('templates/request/requestTechnician.php', $array);
         echo $form->getHTML();
     }
     elseif ($_POST ['searchRequest'] == '... des pièces')
     {
         $_POST ['searchRequest'] = NULL;
         $array = array (array ("Marque du véhicule",'brand' ),
-                array ("Modèle du véhicule",'brand' ),
+                array ("Modèle du véhicule",'model' ),
                 array ('Nom','name' ),
                 array ('Année','year' ),
                 array ("Id de la pièce",'id_part' ) );
-        $form = new FormObject('', $array);
+        $form = new FormObject('templates/request/requestPart.php', $array);
         echo $form->getHTML();
     }
     elseif ($_POST ['searchRequest'] == '... des forfaits')
     {
         $_POST ['searchRequest'] = NULL;
-        $array = array (array ('Id du Forfait','package' ),
+        $array = array (array ('Id du Forfait','id_package' ),
                 array ('Nom','name' ),
                 array ('Année','year' ),
                 array ("Kilométrage",'kilometerage' ) );
-        $form = new FormObject('', $array);
+        $form = new FormObject('templates/request/requestPackage.php', $array);
         echo $form->getHTML();
     }
 }

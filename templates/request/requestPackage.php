@@ -12,9 +12,9 @@ if (! isset($_SESSION ['name']) and $_SESSION ['group_id'] = ! 1)
 <html>
 <head>
 <meta charset='utf-8' />
-<link rel='stylesheet' href='../modules/css/index.css' />
+<link rel='stylesheet' href='../../modules/css/index.css' />
 
-<title>Chez Bébert - Clients</title>
+<title>Chez Bébert - Forfaits</title>
 
 </head>
 
@@ -39,56 +39,59 @@ if (! isset($_SESSION ['name']) and $_SESSION ['group_id'] = ! 1)
 			<tr>
 				<th><img src="../../images/chezbebert_logo.png" height="150px"></th>
 				<th>
-					<h1>ACCUEIL - CLIENTS</h1>
+					<h1>FORFAITS</h1>
 				</th>
 				<th><img src="../../images/chezbebert_logo.png" height="150px"></th>
 			</tr>
 		</table>
 	</div>
 
-	<h2>Liste des clients trouvés</h2>
+	<h2>Liste des forfaits trouvés</h2>
 	<div id='result'>
 		<table style='width: 100%'>
 			<tr>
-				<th>Id du client</th>
+				<th>Id du forfait</th>
 				<th>Nom</th>
-				<th>Prénom</th>
-				<th>Ville</th>
+				<th>Année</th>
+				<th>Kilométrage</th>
+				<th>Prix</th>
 			</tr>
 		
 <?php
 
 require_once (__DIR__ . '/../../config.php');
-require_once (__DIR__ . '/../../includes/objects/CustomerRequest.class.php');
+require_once (__DIR__ . '/../../includes/objects/PackageRequest.class.php');
 
+$id_package = $_POST ['id_package'];
 $name = $_POST ['name'];
-$surname = $_POST ['surname'];
-$city = $_POST ['city'];
+$year = $_POST ['year'];
+$kilometerage = $_POST ['kilometerage'];
 
-$query = new CustomerRequest('', $name, $surname, $city);
+$query = new PackageRequest($id_package, $name, $year, $kilometerage);
 
 $mysqli = new mysqli($server, $user, $password, $database);
 
 $result = $mysqli->query($query->getRequest());
 if ($result == false)
 {
-    echo 'Aucun client trouvé... <a href="../..">Revenir en arrière</a>';
+    echo 'Aucun forfait trouvé... <a href="../..">Revenir en arrière</a>';
 }
 else
 {
     for($i = 1; $i <= $result->num_rows; $i ++)
     {
         $fetcharray = $result->fetch_array();
-        $id = $fetcharray ['id_customer'];
+        $id = $fetcharray ['id_package'];
         $name = $fetcharray ['name'];
-        $surname = $fetcharray ['surname'];
-        $city = $fetcharray ['city'];
+        $year = $fetcharray ['year'];
+        $kilometerage = $fetcharray ['kilometerage'];
+        $price = $fetcharray['price'];
         echo "<tr>
                 <th>$id</th>
-				<th>$surname</th>
 				<th>$name</th>
-				<th>$city</th>
-                
+				<th>$year</th>
+				<th>$kilometerage</th>
+                <th>$price</th>
 			</tr>";
     }
 }
