@@ -1,34 +1,35 @@
 <?php
 require_once (__DIR__ . '/../../config.php');
 
-// Récupération de l'utilisateur et de son pass hashé
-$pseudo = $_POST['pseudo'];
+$name = $_POST ['name'];
+$surname = $_POST ['surname'];
 
 $mysqli = new mysqli($server, $user, $password, $database);
-$query = "SELECT id, pass, group_id FROM users WHERE pseudo = '" . $pseudo ."'";
-
+$query = "SELECT id_technician, name, surname, password, group_id FROM technicians WHERE name = '" . $name . "' AND surname = '" . $surname . "'";
 if (! $mysqli->query($query))
 {
     echo 'Mauvais identifiant ou mot de passe !';
+    $mysqli->close();
 }
 else
 {
     $resultat = $mysqli->query($query)->fetch_array();
-    $isPasswordCorrect = password_verify($_POST ['pass'], $resultat ['pass']);
+    $isPasswordCorrect = password_verify($_POST ['password'], $resultat ['password']);
     if ($isPasswordCorrect)
     {
-        $isPasswordCorrect = password_verify($_POST ['pass'], $resultat ['pass']);
         session_start();
-        $_SESSION ['id'] = $resultat ['id'];
-        $_SESSION ['pseudo'] = $pseudo;
+        $_SESSION ['id_technician'] = $resultat ['id_technician'];
+        $_SESSION ['name'] = $name;
+        $_SESSION ['surname'] = $surname;
         $_SESSION ['group_id'] = $resultat ['group_id'];
-        echo "Vous êtes connecté !";
+        $_SESSION ['request'] = array ();
+        $_SESSION ['oldpage'] = '';
         header("Location: /garage_bebert/index.php");
         exit();
     }
     else
     {
-        echo 'Mauvais identifiant ou mot de passe !';
         header("Location: /garage_bebert/templates/connection.html");
+        exit();
     }
 }
